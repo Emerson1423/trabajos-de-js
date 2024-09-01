@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juegos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <!-- Navbar -->
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li id="adminButton" style="display:none;"><a href="admin.html">Gestión</a></li>
+                <li id="loginButton"><a href="login.html">Login</a></li>
+                <li id="logoutButton" style="display:none;"><a href="#">Cerrar Sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Bienvenido a la Tienda de Juegos</h1>
+        <p>Aquí puedes encontrar una variedad de juegos interesantes.</p>
+    </main>
+
+    <section id="gamesList">
+        <!-- Lista de juegos se cargará aquí -->
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Tu Aplicación de Juegos. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="index.js"></script>
+    <script>
+        // Verificar si el usuario ha iniciado sesión
+        function checkLogin() {
+            const isLoggedIn = localStorage.getItem('loggedIn');
+            const adminButton = document.getElementById('adminButton');
+            const logoutButton = document.getElementById('logoutButton');
+            const loginButton = document.getElementById('loginButton');
+
+            if (isLoggedIn) {
+                adminButton.style.display = 'block';
+                logoutButton.style.display = 'block';
+                loginButton.style.display = 'none';
+            } else {
+                adminButton.style.display = 'none';
+                logoutButton.style.display = 'none';
+                loginButton.style.display = 'block';
+            }
+        }
+
+        // Manejador del botón de cierre de sesión
+        document.getElementById('logoutButton')?.addEventListener('click', function () {
+            localStorage.removeItem('loggedIn');
+            window.location.href = 'index.html'; // Redirigir a la página de inicio
+        });
+
+        // Cargar la lista de juegos en la página de inicio
+        function loadGames() {
+            const games = JSON.parse(localStorage.getItem('gamesData')) || [];
+            const gamesList = document.getElementById('gamesList');
+            gamesList.innerHTML = ''; // Limpiar lista existente
+            games.forEach(game => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${game.name} - ${game.category} - ${game.releaseDate} - $${game.price}`;
+                gamesList.appendChild(listItem);
+            });
+        }
+
+        // Inicializar la página
+        checkLogin();
+        loadGames();
+    </script>
+</body>
+</html>
+
