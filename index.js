@@ -57,7 +57,7 @@ function displayGames(gamesToDisplay) {
                 <br> Género: ${game.category}
                 <br> Precio: $${game.price}
                 <br> Fecha de Lanzamiento: ${game.releaseDate}
-                <br> Descripción: ${game.description || 'No disponible'}
+                <br> Descripción: ${game.description}
             `;
             
             // Solo agregar los botones de edición/eliminación si estamos en la página de admin
@@ -101,12 +101,25 @@ document.getElementById('logoutButton')?.addEventListener('click', function() {
 // Cargar juegos desde un archivo JSON (solo para la página de inicio)
 
 // Función para cargar juegos desde localStorage
+
 function loadGames() {
-    const storedGames = JSON.parse(localStorage.getItem('gamesData')) || [];
-    console.log(storedGames); // Verifica que cada objeto de juego tenga la propiedad `description`
-    games = storedGames;
-    displayGames(games);
+    
+
+
+    if (window.location.pathname.includes('admin.html')) {
+        loadGamesForAdmin();
+    } else {
+        const storedGames = JSON.parse(localStorage.getItem('gamesData')) || [];
+        fetch('gamesData.json')
+            .then(response => response.json())
+            .then(data => {
+                const allGames = [...data, ...storedGames];
+                displayGames(allGames);
+            })
+            .catch(error => console.error('Error loading games:', error));
+    }
 }
+
 
 
 
@@ -283,5 +296,8 @@ function initialize() {
     loadCategoryFilter(); // Cargar categorías en el filtro de búsqueda
     loadGames(); // Cargar juegos
 }
+
+document.addEventListener('DOMContentLoaded', initialize);
+
 
 initialize();
