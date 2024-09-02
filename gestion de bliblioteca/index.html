@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca - Inicio</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Biblioteca</h1>
+        <nav>
+            <!-- Mostrar el enlace de administración solo si el usuario ha iniciado sesión -->
+            <a id="adminLink" href="admin.html" style="display: none;">Administración</a>
+            <!-- Botón de Login visible siempre -->
+            <a id="loginLink" href="login.html">Login</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Buscar Libros</h2>
+        <form id="searchForm">
+            <input type="text" id="searchQuery" placeholder="Buscar por título">
+            <button type="submit">Buscar</button>
+        </form>
+
+        <h2>Lista de Libros</h2>
+        <ul id="booksList"></ul>
+    </main>
+
+    <script src="scripts.js"></script>
+    <script>
+        // Función para mostrar los libros en la lista
+        function displayBooks(libros) {
+            const booksList = document.getElementById('booksList');
+            booksList.innerHTML = '';
+            libros.forEach(libro => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <strong>Título:</strong> ${libro.titulo} <br>
+                    <strong>Autor:</strong> ${libro.autor} <br>
+                    <strong>Categoría:</strong> ${libro.categoria} <br>
+                    <strong>Fecha de Publicación:</strong> ${libro.fechaPublicacion} <br>
+                    <strong>Disponibilidad:</strong> ${libro.disponible ? 'Disponible' : 'No Disponible'} <br>
+                `;
+                booksList.appendChild(li);
+            });
+        }
+
+        // Función para manejar el formulario de búsqueda
+        document.getElementById('searchForm')?.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const query = document.getElementById('searchQuery').value;
+            const filteredBooks = biblioteca.buscarLibros(query);
+            displayBooks(filteredBooks);
+        });
+
+        // Mostrar el enlace de administración solo si el usuario ha iniciado sesión
+        function checkLogin() {
+            const isLoggedIn = localStorage.getItem('loggedIn');
+            const adminLink = document.getElementById('adminLink');
+            if (adminLink) {
+                adminLink.style.display = isLoggedIn ? 'block' : 'none';
+            }
+        }
+
+        // Llamar a la función para verificar el estado de inicio de sesión
+        checkLogin();
+
+        // Cargar los libros al iniciar la página
+        displayBooks(biblioteca.buscarLibros(''));
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca - Administración</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Administración de Biblioteca</h1>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <button id="logoutButton">Cerrar Sesión</button>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Agregar Libro</h2>
+        <form id="addBookForm">
+            <input type="text" id="titulo" placeholder="Título" required>
+            <input type="text" id="autor" placeholder="Autor" required>
+            <input type="text" id="categoria" placeholder="Categoría" required>
+            <input type="date" id="fechaPublicacion" placeholder="Fecha de Publicación" required>
+            <button type="submit">Agregar Libro</button>
+        </form>
+
+        <h2>Editar Libro</h2>
+        <form id="editBookForm" style="display: none;">
+            <input type="hidden" id="editId">
+            <input type="text" id="editTitulo" placeholder="Título" required>
+            <input type="text" id="editAutor" placeholder="Autor" required>
+            <input type="text" id="editCategoria" placeholder="Categoría" required>
+            <input type="date" id="editFechaPublicacion" placeholder="Fecha de Publicación" required>
+            <button type="submit">Actualizar Libro</button>
+        </form>
+
+        <h2>Lista de Libros</h2>
+        <ul id="booksList"></ul>
+    </main>
+
+    <script src="scripts.js"></script>
+    <script>
+        // Verificar si el usuario ha iniciado sesión
+        function checkAdminAccess() {
+            const isLoggedIn = localStorage.getItem('loggedIn');
+            if (!isLoggedIn) {
+                window.location.href = 'login.html'; // Redirigir a login si no está autenticado
+            }
+        }
+
+        // Llamar a la función para verificar el estado de inicio de sesión
+        checkAdminAccess();
+
+        // Función para mostrar los libros en la lista
+        function displayBooks(libros) {
+            const booksList = document.getElementById('booksList');
+            booksList.innerHTML = '';
+            libros.forEach(libro => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <strong>Título:</strong> ${libro.titulo} <br>
+                    <strong>Autor:</strong> ${libro.autor} <br>
+                    <strong>Categoría:</strong> ${libro.categoria} <br>
+                    <strong>Fecha de Publicación:</strong> ${libro.fechaPublicacion} <br>
+                    <strong>Disponibilidad:</strong> ${libro.disponible ? 'Disponible' : 'No Disponible'} <br>
+                    <button onclick="editBook(${libro.id})">Editar</button>
+                    <button onclick="deleteBook(${libro.id})">Eliminar</button>
+                `;
+                booksList.appendChild(li);
+            });
+        }
+
+        // Función para manejar el formulario de agregar libro
+        document.getElementById('addBookForm')?.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const titulo = document.getElementById('titulo').value.trim();
+            const autor = document.getElementById('autor').value.trim();
+            const categoria = document.getElementById('categoria').value.trim();
+            const fechaPublicacion = document.getElementById('fechaPublicacion').value.trim();
+            
+            if (titulo && autor && categoria && fechaPublicacion) {
+                const nuevoLibro = new Libro(Date.now(), titulo, autor, categoria, fechaPublicacion, true);
+                biblioteca.agregarLibro(nuevoLibro);
+                displayBooks(biblioteca.buscarLibros(''));
+            }
+        });
+
+        // Función para eliminar un libro
+        function deleteBook(id) {
+            biblioteca.eliminarLibro(id);
+            displayBooks(biblioteca.buscarLibros(''));
+        }
+
+        // Función para preparar el formulario de edición
+        function editBook(id) {
+            const libro = biblioteca.libros.find(libro => libro.id === id);
+            if (libro) {
+                document.getElementById('editId').value = libro.id;
+                document.getElementById('editTitulo').value = libro.titulo;
+                document.getElementById('editAutor').value = libro.autor;
+                document.getElementById('editCategoria').value = libro.categoria;
+                document.getElementById('editFechaPublicacion').value = libro.fechaPublicacion;
+
+                document.getElementById('editBookForm').style.display = 'block';
+            }
+        }
+
+        // Función para manejar el formulario de edición
+        document.getElementById('editBookForm')?.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const id = parseInt(document.getElementById('editId').value, 10);
+            const titulo = document.getElementById('editTitulo').value.trim();
+            const autor = document.getElementById('editAutor').value.trim();
+            const categoria = document.getElementById('editCategoria').value.trim();
+            const fechaPublicacion = document.getElementById('editFechaPublicacion').value.trim();
+            
+            if (id && titulo && autor && categoria && fechaPublicacion) {
+                biblioteca.editarLibro(id, {
+                    titulo: titulo,
+                    autor: autor,
+                    categoria: categoria,
+                    fechaPublicacion: fechaPublicacion
+                });
+                displayBooks(biblioteca.buscarLibros(''));
+                document.getElementById('editBookForm').style.display = 'none';
+            }
+        });
+ // Función para manejar el cierre de sesión
+document.getElementById('logoutButton')?.addEventListener('click', function () {
+    localStorage.removeItem('loggedIn');
+     window.location.href = 'index.html'; // Redirigir a la página de inicio de sesión
+});
+
+        // Cargar los libros al iniciar la página
+        displayBooks(biblioteca.buscarLibros(''));
+    </script>
+</body>
+</html>
+
+
+
