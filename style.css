@@ -1,0 +1,94 @@
+/* ====== General Styles ====== */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-image: url('fondos-para-páginas-web-6.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+
+header {
+    background-color: #4a90e2;
+    padding: 1rem 0;
+}
+nav ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+}
+  
+nav ul li {
+    margin: 0 1rem;
+}
+  
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+  
+nav ul li a:hover {
+    color: #f0f2f5;
+}
+
+/* ====== Main Content ====== */
+main {
+    padding: 20px;
+    text-align: center;
+}
+
+main h1 {
+    font-size: 2em;
+}
+
+main p {
+    font-size: 1.2em;
+    margin-top: 10px;
+}
+
+/* ====== Games List ====== */
+#gamesList {
+    margin: 20px auto;
+    max-width: 1500px;
+}
+
+#gamesList ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#gamesList li {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* ====== Footer ====== */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 20px;
+}
+
+/* ====== Specific Styles for index.html ====== */
+/* Puedes agregar estilos específicos para la página de inicio aquí */
+
+    
+    

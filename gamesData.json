@@ -1,0 +1,149 @@
+[
+    {
+        "name": "Aventura Épica",
+        "category": "Aventura",
+        "releaseDate": "2024-01-15",
+        "price": 49.99,
+        "description": "Un emocionante juego de aventuras con un mundo abierto vasto y exploración sin límites."
+    },
+    {
+        "name": "Furia de los Dragones",
+        "category": "Acción",
+        "releaseDate": "2023-06-22",
+        "price": 59.99,
+        "description": "Lucha contra dragones en un mundo lleno de magia y desafíos épicos."
+    },
+    {
+        "name": "Desafío Urbano",
+        "category": "Deportes",
+        "releaseDate": "2024-04-10",
+        "price": 39.99,
+        "description": "Competencias deportivas urbanas con gráficos realistas y mecánicas innovadoras."
+    },
+    {
+        "name": "Rally Off-Road",
+        "category": "Carreras",
+        "releaseDate": "2023-11-05",
+        "price": 54.99,
+        "description": "Corre en terrenos accidentados y desafía a tus amigos en emocionantes carreras off-road."
+    },
+    {
+        "name": "Estrategia Suprema",
+        "category": "Estrategia",
+        "releaseDate": "2024-03-20",
+        "price": 44.99,
+        "description": "Desarrolla tu imperio en este juego de estrategia en tiempo real con múltiples facciones."
+    },
+    {
+        "name": "El Guardián del Espacio",
+        "category": "Ciencia Ficción",
+        "releaseDate": "2023-08-30",
+        "price": 64.99,
+        "description": "Explora el espacio y defiende tu nave en un universo futurista lleno de misterios."
+    },
+    {
+        "name": "Ritmo en la Ciudad",
+        "category": "Música",
+        "releaseDate": "2024-07-01",
+        "price": 29.99,
+        "description": "Disfruta de una experiencia musical interactiva con pistas y desafíos rítmicos."
+    },
+    {
+        "name": "Aventura en la Jungla",
+        "category": "Aventura",
+        "releaseDate": "2024-02-18",
+        "price": 49.99,
+        "description": "Una emocionante aventura en la jungla con muchos secretos por descubrir."
+    },
+    {
+        "name": "Combatientes del Futuro",
+        "category": "Acción",
+        "releaseDate": "2023-12-15",
+        "price": 59.99,
+        "description": "Un juego de acción en un futuro post-apocalíptico con intensas batallas y tecnología avanzada."
+    },
+    {
+        "name": "Liga de Campeones",
+        "category": "Deportes",
+        "releaseDate": "2024-05-25",
+        "price": 39.99,
+        "description": "Participa en la liga de campeones y demuestra tus habilidades en los deportes más populares."
+    },
+    {
+        "name": "Velocidad Extrema",
+        "category": "Carreras",
+        "releaseDate": "2024-09-10",
+        "price": 54.99,
+        "description": "Desafía a tus oponentes en carreras a alta velocidad con vehículos personalizables."
+    },
+    {
+        "name": "Conquista Mundial",
+        "category": "Estrategia",
+        "releaseDate": "2024-01-10",
+        "price": 44.99,
+        "description": "Conquista el mundo en un juego de estrategia por turnos con una compleja red de diplomacia."
+    },
+    {
+        "name": "Explorador Galáctico",
+        "category": "Ciencia Ficción",
+        "releaseDate": "2023-10-15",
+        "price": 64.99,
+        "description": "Viaja por la galaxia y explora planetas desconocidos en esta aventura espacial."
+    },
+    {
+        "name": "Maestro del Ritmo",
+        "category": "Música",
+        "releaseDate": "2024-06-05",
+        "price": 29.99,
+        "description": "Conviértete en el maestro del ritmo con desafíos musicales y canciones pegajosas."
+    },
+    {
+        "name": "Enigma en la Torre",
+        "category": "Aventura",
+        "releaseDate": "2024-03-15",
+        "price": 49.99,
+        "description": "Resuelve los misterios en una torre llena de enigmas y trampas."
+    },
+    {
+        "name": "Guerra de Titanes",
+        "category": "Acción",
+        "releaseDate": "2023-11-20",
+        "price": 59.99,
+        "description": "Participa en combates épicos contra titanes en una batalla sin fin."
+    },
+    {
+        "name": "Desafío en la Cancha",
+        "category": "Deportes",
+        "releaseDate": "2024-07-20",
+        "price": 39.99,
+        "description": "Experimenta la emoción de los deportes con gráficos realistas y modos de juego diversos."
+    },
+    {
+        "name": "Ruta Salvaje",
+        "category": "Carreras",
+        "releaseDate": "2024-10-05",
+        "price": 54.99,
+        "description": "Corre por rutas salvajes y enfrenta desafíos en una competencia de carreras intensa."
+    },
+    {
+        "name": "Reino en Guerra",
+        "category": "Estrategia",
+        "releaseDate": "2024-04-10",
+        "price": 44.99,
+        "description": "Desarrolla tu reino y enfrenta a tus enemigos en un juego de estrategia épico."
+    },
+    {
+        "name": "Viaje Estelar",
+        "category": "Ciencia Ficción",
+        "releaseDate": "2024-08-15",
+        "price": 64.99,
+        "description": "Embárcate en un viaje estelar a través del cosmos en una aventura futurista."
+    },
+    {
+        "name": "Festival de Música",
+        "category": "Música",
+        "releaseDate": "2024-05-30",
+        "price": 29.99,
+        "description": "Participa en un festival de música virtual con una gran variedad de géneros y artistas."
+    }
+]
