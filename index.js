@@ -163,6 +163,9 @@ function createEditButton(id) {
             document.getElementById('price').value = game.price;
             document.getElementById('description').value = game.description;
             editGameId = id;
+            
+            // Desplazar hacia el formulario
+            document.getElementById('gameForm').scrollIntoView({ behavior: 'smooth' });
         }
     };
     return btn;
