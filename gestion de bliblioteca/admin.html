@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Biblioteca - Administración</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="admin.css">
 </head>
 <body>
     <header>
@@ -16,28 +16,93 @@
     </header>
 
     <main>
-        <h2>Agregar Libro</h2>
+        
         <form id="addBookForm">
+            <h2>Agregar Libro</h2>
             <input type="text" id="titulo" placeholder="Título" required>
             <input type="text" id="autor" placeholder="Autor" required>
-            <input type="text" id="categoria" placeholder="Categoría" required>
-            <input type="date" id="fechaPublicacion" placeholder="Fecha de Publicación" required>
+            <select id="categoria" required>
+                <option value="" disabled selected>Seleccionar categoría</option>
+                <option value="Ficción">Ficción</option>
+                <option value="No Ficción">No Ficción</option>
+                <option value="Ciencia">Ciencia</option>
+                <option value="Historia">Historia</option>
+                <!-- Agrega más opciones según sea necesario -->
+            </select>
+            <input type="date" id="fechaPublicacion" required>
+            
+            <!-- Selección de género -->
+            <select id="genero" required>
+                <option value="" disabled selected>Seleccionar género</option>
+                <option value="Aventura">Aventura</option>
+                <option value="Romance">Romance</option>
+                <option value="Misterio">Misterio</option>
+                <option value="Ciencia Ficción">Ciencia Ficción</option>
+                <option value="Fantasía">Fantasía</option>
+                <!-- Agrega más opciones según sea necesario -->
+            </select>
+        
+            <!-- Selección de disponibilidad -->
+            <select id="disponible" required>
+                <option value="" disabled selected>Seleccionar disponibilidad</option>
+                <option value="true">Disponible</option>
+                <option value="false">No Disponible</option>
+            </select>
+        
             <button type="submit">Agregar Libro</button>
         </form>
-
-        <h2>Editar Libro</h2>
+        
         <form id="editBookForm" style="display: none;">
+            <h2>Editar Libro</h2>
             <input type="hidden" id="editId">
             <input type="text" id="editTitulo" placeholder="Título" required>
             <input type="text" id="editAutor" placeholder="Autor" required>
-            <input type="text" id="editCategoria" placeholder="Categoría" required>
-            <input type="date" id="editFechaPublicacion" placeholder="Fecha de Publicación" required>
+            <select id="editCategoria" required>
+                <option value="" disabled selected>Seleccionar categoría</option>
+                <option value="Ficción">Ficción</option>
+                <option value="No Ficción">No Ficción</option>
+                <option value="Ciencia">Ciencia</option>
+                <option value="Historia">Historia</option>
+                <!-- Agrega más opciones según sea necesario -->
+            </select>
+            <input type="date" id="editFechaPublicacion" required>
+            
+            <!-- Selección de género -->
+            <select id="editGenero" required>
+                <option value="" disabled selected>Seleccionar género</option>
+                <option value="Aventura">Aventura</option>
+                <option value="Romance">Romance</option>
+                <option value="Misterio">Misterio</option>
+                <option value="Ciencia Ficción">Ciencia Ficción</option>
+                <option value="Fantasía">Fantasía</option>
+                <!-- Agrega más opciones según sea necesario -->
+            </select>
+        
+            <!-- Selección de disponibilidad -->
+            <select id="editDisponible" required>
+                <option value="" disabled selected>Seleccionar disponibilidad</option>
+                <option value="true">Disponible</option>
+                <option value="false">No Disponible</option>
+            </select>
+        
             <button type="submit">Actualizar Libro</button>
         </form>
 
-        <h2>Lista de Libros</h2>
-        <ul id="booksList"></ul>
+        
     </main>
+
+    <main>
+        <h2>Lista de Libros</h2>
+        <div>
+           
+            <ul id="booksList"></ul>
+        </div>
+
+    </main>
+ 
+        
+        
+   
 
     <script src="scripts.js"></script>
     <script>
@@ -71,20 +136,63 @@
             });
         }
 
-        // Función para manejar el formulario de agregar libro
         document.getElementById('addBookForm')?.addEventListener('submit', function (e) {
-            e.preventDefault();
-            const titulo = document.getElementById('titulo').value.trim();
-            const autor = document.getElementById('autor').value.trim();
-            const categoria = document.getElementById('categoria').value.trim();
-            const fechaPublicacion = document.getElementById('fechaPublicacion').value.trim();
-            
-            if (titulo && autor && categoria && fechaPublicacion) {
-                const nuevoLibro = new Libro(Date.now(), titulo, autor, categoria, fechaPublicacion, true);
-                biblioteca.agregarLibro(nuevoLibro);
-                displayBooks(biblioteca.buscarLibros(''));
-            }
+    e.preventDefault();
+    const titulo = document.getElementById('titulo').value.trim();
+    const autor = document.getElementById('autor').value.trim();
+    const categoria = document.getElementById('categoria').value.trim();
+    const fechaPublicacion = document.getElementById('fechaPublicacion').value.trim();
+    const genero = document.getElementById('genero').value.trim();
+    const disponible = document.getElementById('disponible').value === 'true'; // Convertir a booleano
+    
+    if (titulo && autor && categoria && fechaPublicacion && genero) {
+        const nuevoLibro = new Libro(Date.now(), titulo, autor, categoria, fechaPublicacion, disponible, genero);
+        biblioteca.agregarLibro(nuevoLibro);
+        displayBooks(biblioteca.buscarLibros(''));
+    }
+});
+
+function editBook(id) {
+    const libro = biblioteca.libros.find(libro => libro.id === id);
+    if (libro) {
+        document.getElementById('editId').value = libro.id;
+        document.getElementById('editTitulo').value = libro.titulo;
+        document.getElementById('editAutor').value = libro.autor;
+        document.getElementById('editCategoria').value = libro.categoria;
+        document.getElementById('editFechaPublicacion').value = libro.fechaPublicacion;
+        document.getElementById('editGenero').value = libro.genero;
+        document.getElementById('editDisponible').value = libro.disponible.toString(); // Convertir a string
+        
+        document.getElementById('editBookForm').style.display = 'block';
+    }
+}
+
+document.getElementById('editBookForm')?.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const id = parseInt(document.getElementById('editId').value, 10);
+    const titulo = document.getElementById('editTitulo').value.trim();
+    const autor = document.getElementById('editAutor').value.trim();
+    const categoria = document.getElementById('editCategoria').value.trim();
+    const fechaPublicacion = document.getElementById('editFechaPublicacion').value.trim();
+    const genero = document.getElementById('editGenero').value.trim();
+    const disponible = document.getElementById('editDisponible').value === 'true'; // Convertir a booleano
+    
+    if (id && titulo && autor && categoria && fechaPublicacion && genero) {
+        biblioteca.editarLibro(id, {
+            titulo: titulo,
+            autor: autor,
+            categoria: categoria,
+            fechaPublicacion: fechaPublicacion,
+            genero: genero,
+            disponible: disponible
         });
+        displayBooks(biblioteca.buscarLibros(''));
+        document.getElementById('editBookForm').style.display = 'none';
+    }
+});
+
+
+     
 
         // Función para eliminar un libro
         function deleteBook(id) {
@@ -106,37 +214,21 @@
             }
         }
 
-        // Función para manejar el formulario de edición
-        document.getElementById('editBookForm')?.addEventListener('submit', function (e) {
-            e.preventDefault();
-            const id = parseInt(document.getElementById('editId').value, 10);
-            const titulo = document.getElementById('editTitulo').value.trim();
-            const autor = document.getElementById('editAutor').value.trim();
-            const categoria = document.getElementById('editCategoria').value.trim();
-            const fechaPublicacion = document.getElementById('editFechaPublicacion').value.trim();
-            
-            if (id && titulo && autor && categoria && fechaPublicacion) {
-                biblioteca.editarLibro(id, {
-                    titulo: titulo,
-                    autor: autor,
-                    categoria: categoria,
-                    fechaPublicacion: fechaPublicacion
-                });
-                displayBooks(biblioteca.buscarLibros(''));
-                document.getElementById('editBookForm').style.display = 'none';
-            }
+
+        // Función para manejar el cierre de sesión
+        document.getElementById('logoutButton')?.addEventListener('click', function () {
+        localStorage.removeItem('loggedIn');
+        window.location.href = 'index.html'; // Redirigir a la página de inicio de sesión
         });
- // Función para manejar el cierre de sesión
-document.getElementById('logoutButton')?.addEventListener('click', function () {
-    localStorage.removeItem('loggedIn');
-     window.location.href = 'index.html'; // Redirigir a la página de inicio de sesión
-});
 
         // Cargar los libros al iniciar la página
         displayBooks(biblioteca.buscarLibros(''));
     </script>
 </body>
 </html>
+
+
+
 
 
 
